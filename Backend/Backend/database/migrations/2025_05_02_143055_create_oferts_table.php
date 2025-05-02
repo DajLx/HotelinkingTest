@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string("precio_orignal");
             $table->string("descuento");
             $table->string("disponble_hasta");
-            $table->boolean("");
+            $table->boolean("canjeado");
             $table->timestamps();
             
         });
