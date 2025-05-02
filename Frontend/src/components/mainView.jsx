@@ -1,22 +1,26 @@
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import FakeData from "../utils/fakeData.json";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-
+import { Toast } from "../utils/swal";
 
 console.log("entre en el mainview");
 
 const MainView = () => {
   const user = useSelector((state) => state.user);
+  const offerts = useSelector((state) => state.offerts);
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   console.log(user);
   const navi = useNavigate();
   const [description, setDescription] = useState(null);
   return (
     <Container>
-      
       <Row>
-        {FakeData.ofertas.map((ofertas) => {
+        {}
+        {offerts.map((ofertas) => {
           return (
             <Col key={ofertas.id} xs={6} style={{ border: "black solid  1px" }}>
               <Card>
@@ -46,7 +50,14 @@ const MainView = () => {
                   </Button>
                   <Button
                     onClick={() => {
-                      navi("/login");
+                      if (!user.name) {
+                        navi("/login");
+                      } else {
+                        Toast.fire({
+                          icon: "success",
+                          title: "Comprado",
+                        });
+                      }
                     }}
                   >
                     Comprar {ofertas.precio_oferta}$
