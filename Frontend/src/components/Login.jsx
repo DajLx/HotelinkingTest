@@ -5,15 +5,15 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../state/user";
 import { useSelector } from "react-redux";
+import { axios, getToken } from "../utils/axios";
+import { useNavigate } from "react-router";
 
 function LoginForm() {
   const dis = useDispatch();
-  const user = useSelector((state) => state.user);
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-  const [mail, setMail] = useState("");
-  const [pass, setPass] = useState("");
+  const navi = useNavigate();
+  
+  const [email, setMail] = useState("");
+  const [password, setPass] = useState("");
   return (
     <div style={{ height: "100vh", display: "flex", alignItems: "center" }}>
       <Container style={{ width: "45% " }}>
@@ -41,9 +41,21 @@ function LoginForm() {
 
           <Button
             variant="primary"
-            onClick={() => {
-              dis(setUser({ mail, clave: pass }));
-              console.log(user);
+            type="button"
+            onClick={async () => {
+              console.log(email, password);
+              await getToken();
+
+              const response = await axios.post(
+                "http://localhost:8000/login",
+                {
+                  email,
+                  password,
+                },
+                { withCredentials: true }
+              );
+              dis(setUser(response.data.user));
+              navi("/");
             }}
           >
             Inicia sesion
