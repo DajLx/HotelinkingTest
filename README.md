@@ -7,4 +7,5 @@ backend:
 
 Frontend:
 #instalar dependencias con npm i o npm install
-#
+#limpiar las coockies del navegador.
+#tener instalado php, xampp (base de datos mysql),composer y node.
