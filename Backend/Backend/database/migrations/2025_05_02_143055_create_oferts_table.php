@@ -16,10 +16,10 @@ return new class extends Migration {
             $table->string('producto');
             $table->string("descripcion");
             $table->string("precio_oferta");
-            $table->string("precio_orignal");
+            $table->string("precio_original");
             $table->string("descuento");
-            $table->string("disponble_hasta");
-            $table->boolean("canjeado");
+            $table->string("disponible_hasta");
+            $table->boolean("canjeado")->default(false);
             $table->timestamps();
             
         });
